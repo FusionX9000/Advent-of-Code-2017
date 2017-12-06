@@ -31,12 +31,14 @@ move = [(-1,0),(0,-1),(1,0),(0,1)] #list for clockwise movement
 
 #Add all the neighbouring elements of the array at given index
 def sum_all(arr,index):
-    rangey1 = max(index[0]-1,0)
-    rangey2 = min(index[0]+1,square)
-    rangex1 = max(index[1]-1,0)
-    rangex2 = min(index[1]+1,square)
-    arr = [x[rangex1:rangex2+1] for x in arr[rangey1:rangey2+1]]
-    suma = sum([sum(x) for x in arr])
+    suma = 0
+    neighbours =  [(1, 0), (1, -1), (0, -1), (-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1)]
+    for i in neighbours:
+        try:
+            index2=[sum(x) for x in zip(i,index)]
+            suma+=arr[index2[0]][index2[1]]
+        except:
+            continue
     return suma
 
 #Navigates the boundary of given length and initialises the elements with sum of neighbouring elements
